@@ -1,0 +1,75 @@
+<div class="container">
+  <h2>Product List</h2>
+
+  <!-- Table to display products -->
+  <table class="product-table" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Store ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.productId }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.storeId }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No products message -->
+  <div *ngIf="products.length === 0" class="no-products">
+    <p>No products available. Try again later.</p>
+  </div>
+
+  <div class="add-product">
+    <h3>Add New Product</h3>
+    <form (ngSubmit)="onAddProduct()">
+  
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="newProduct.name" name="name" required />
+  
+      <label for="price">Price:</label>
+      <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" step="0.01" required />
+  
+      <label for="storeId">Store ID:</label>
+      <input type="number" id="storeId" [(ngModel)]="newProduct.storeId" name="storeId" required />
+  
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+
+  <!-- Delete Product Section -->
+<div class="delete-product">
+  <h3>Delete a Product</h3>
+  <form (ngSubmit)="onDeleteProduct()">
+    <label for="deleteId">Product ID:</label>
+    <input type="number" id="deleteId" [(ngModel)]="deleteProductId" name="deleteId" required />
+    <button type="submit">Delete Product</button>
+  </form>
+</div>
+
+
+<!-- Edit Product Section -->
+<div class="edit-product">
+  <h3>Edit a Product</h3>
+  <form (ngSubmit)="onEditProduct()">
+    <label for="editId">Product ID:</label>
+    <input type="number" id="editId" [(ngModel)]="editProduct.productId" name="editId" required />
+
+    <label for="editName">New Name:</label>
+    <input type="text" id="editName" [(ngModel)]="editProduct.name" name="editName" required />
+
+    <label for="editPrice">New Price:</label>
+    <input type="number" id="editPrice" [(ngModel)]="editProduct.price" name="editPrice" step="0.01" required />
+
+    <label for="editStoreId">New Store ID:</label>
+    <input type="number" id="editStoreId" [(ngModel)]="editProduct.storeId" name="editStoreId" required />
+
+    <button type="submit">Edit Product</button>
+  </form>
+</div>
